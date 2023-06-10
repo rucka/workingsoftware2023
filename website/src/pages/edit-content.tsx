@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useQuery } from 'react-query'
 import styled from 'styled-components'
 import { Box, Button, Centered, Page, Protected, TextAreaField, TextInputField } from '../components'
-import { getProduct, ProductUpdate, updateProduct } from '../controller'
+import { getProduct, ProductUpdate, updateProduct } from '../api'
 
 const EditContentPage: NextPage = () => {
   const { push } = useRouter()

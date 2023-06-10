@@ -1,6 +1,5 @@
-import { useAuth } from '../user-context'
+import { useAuth, User } from '../user-context'
 import React from 'react'
-import { User } from '../controller'
 
 type WithUserProps = { children: (user: User | undefined) => React.ReactElement }
 

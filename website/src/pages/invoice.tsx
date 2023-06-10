@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { Protected } from '../components'
-import { invoice } from '../controller'
+import { invoice } from '../api'
 import { Invoice } from '../components/Invoice'
 import { useQuery } from 'react-query'
 

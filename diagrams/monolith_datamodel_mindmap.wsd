@@ -1,0 +1,39 @@
+@startmindmap MonolithModelMindmap
+
+<style>
+mindmapDiagram {
+    node {
+        BackgroundColor white
+    }
+    :depth(1) {
+      BackGroundColor lightgreen
+      RoundCorner 0
+    }
+    :depth(2) {
+      BackGroundColor lightblue
+    }
+}
+</style>
+
++_ monolith
+++ backend
++++ user
+++++_ name
+++++_ email
+++++_ password
+++++_ role
+++++_ address
+++++_ city
++++ product
+++++_ name
+++++_ description
+++++_ images
+++++_ price
++++ issuer
+++++_ name
+++++_ address
+++++_ city
+
+++[#FFBBCC] website
+
+@endmindmap

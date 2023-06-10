@@ -21,7 +21,7 @@ const SectionItem = styled.div<{ itemCount: number; customCss: CSSProp<DefaultTh
 `
 type SectionProps = { children: React.ReactNode; css?: CSSProp<DefaultTheme>; sectionItemCss?: CSSProp<DefaultTheme> }
 export function Section({ children, css, sectionItemCss: sectionItemCss }: SectionProps) {
-  const items = Children.toArray(children)
+  const items: any[] = Children.toArray(children)
   return (
     <SectionContainer customCss={css}>
       {items.map((c: any, i) => (

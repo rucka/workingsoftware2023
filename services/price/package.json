@@ -1,0 +1,24 @@
+{
+  "name": "@workingsoftware2023/price",
+  "version": "1.0.0",
+  "author": "Gianluca Carucci",
+  "license": "MIT",
+  "scripts": {
+    "ts:check": "tsc --skipLibCheck --noEmit",
+    "clean": "rm -rf dist",
+    "build": "tsc --build --force",
+    "start": "ts-node src/index.ts",
+    "prettier:fix": "prettier \"{**/*,*}.{ts,tsx,js,jsx,json,html}\" --write",
+    "prettier:check": "prettier --list-different \"{**/*,*}.{ts,tsx,js,jsx,json,html,md}\""
+  },
+  "dependencies": {
+    "@workingsoftware2023/ts-shared": "1.0.0",
+    "restify": "11.1.0"
+  },
+  "devDependencies": {
+    "@types/restify": "^8.5.4",
+    "prettier": "^2.6.2",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
+  }
+}

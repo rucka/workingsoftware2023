@@ -1,5 +1,5 @@
 import React from 'react'
-import { Product } from '../controller'
+import { Product } from '../api'
 import { Carousel, Section } from '.'
 import styled, { css } from 'styled-components'
 import { device } from '../device'

@@ -1,5 +1,7 @@
 import * as React from 'react'
-import { User } from './controller'
+import { UserCredentials, Profile, me } from './api'
+
+export type User = UserCredentials & Profile
 
 export type UserState = (
   | {
@@ -9,12 +11,25 @@ export type UserState = (
       state: 'loggedout'
     }
   | { state: 'loggedin'; user: User }
-) & { onLogin: (user: User) => void; onLogout: () => void }
+) & { onLogin: (credentials: UserCredentials) => void; onLogout: () => void }
 
 const defaultUserState: UserState = {
   state: 'loading',
-  onLogin: (_: User) => {},
+  onLogin: (_: UserCredentials) => {},
   onLogout: () => {}
+}
+
+const createUser: (c: UserCredentials, p: Profile) => User = (c, p) => ({
+  ...c,
+  ...p
+})
+
+const userFromCredentials: (c: UserCredentials) => User = (c) => {
+  const profile: Profile = {
+    id: c.id,
+    name: c.id
+  }
+  return createUser(c, profile)
 }
 
 const AuthContext = React.createContext<UserState>(defaultUserState)
@@ -37,37 +52,45 @@ export const useAuth = () => {
 
 const USER_KEY = 'USER'
 
-const getSessionLoggedUser = () => {
+const getSessionLoggedCredentials = () => {
   const userAsString: string | null = window.sessionStorage.getItem(USER_KEY)
   if (!userAsString) {
     return undefined
   }
   return JSON.parse(userAsString) as User
 }
-const setSessionLoggedUser = (u: User) => {
-  window.sessionStorage.setItem(USER_KEY, JSON.stringify(u))
+const setSessionLoggedCredentials = (c: UserCredentials) => {
+  window.sessionStorage.setItem(USER_KEY, JSON.stringify(c))
 }
-const resetSessionLoggedUser = () => {
+const resetSessionLoggedCredentials = () => {
   window.sessionStorage.removeItem(USER_KEY)
 }
 
 export const useUserState = () => {
   const [userState, setUserState] = React.useState<UserState>(defaultUserState)
   React.useEffect(() => {
-    const user = getSessionLoggedUser()
+    const user = getSessionLoggedCredentials()
     if (!user) {
       onLogout()
       return
     }
-    onLogin(user)
+    onLogin(user).catch((e) => console.warn('Unexpected error during login:', e))
   }, [])
 
-  const onLogin = (user: User) => {
-    setSessionLoggedUser(user)
+  const onLogin = async (credentials: UserCredentials) => {
+    let user: User | undefined = undefined
+    try {
+      const profile = await me()
+      user = createUser(credentials, profile)
+    } catch (e) {
+      console.warn('ko getting profile:', e)
+      user = userFromCredentials(credentials)
+    }
+    setSessionLoggedCredentials(credentials)
     setUserState({ state: 'loggedin', user, onLogin, onLogout })
   }
   const onLogout = () => {
-    resetSessionLoggedUser()
+    resetSessionLoggedCredentials()
     setUserState({ state: 'loggedout', onLogin, onLogout })
   }
   return userState

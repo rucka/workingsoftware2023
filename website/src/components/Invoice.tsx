@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Invoice } from '../controller'
+import { Invoice } from '../api'
 
 export function Invoice({ invoice }: { invoice: Invoice }) {
   return (

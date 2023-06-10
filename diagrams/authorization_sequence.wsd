@@ -1,0 +1,29 @@
+@startuml Authorization
+
+title Update the price \n[Centralized Authorization]
+actor PO as "Price Office\nBrowser"
+participant IS as "Identity Service\nhttp://*:3002" #4682B4
+participant PS as "Price Service\nhttp://*:3005" #99FF99
+
+PO -> IS : POST /login
+IS --> PO : Success: 200
+PO -> PS : POST /price \n - price: 283
+PS -> IS : POST /authorize\n - role: "price" 
+IS --> PS : Success: 200
+PS --> PO : Success: 200
+
+newpage Update the price \n[Decentralized Authorization]
+actor PO as "Price Office\nBrowser"
+participant IS as "Identity Service\nhttp://*:3002" #4682B4
+participant PS as "Price Service\nhttp://*:3005" #99FF99
+
+PO -> IS : POST /login
+IS -> IS: encode JWT
+IS --> PO : Success: 200 \n SET-COOKIE: 'x-access-tokens'
+PO -> PS : POST /price \n - price: 283 \n COOKIE: 'x-access-tokens'
+PS -> PS: decode JWT
+PS -> PS: isInRole(['admin', 'price'])
+PS --> PO : Success: 200
+
+@enduml
+

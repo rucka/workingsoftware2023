@@ -1,0 +1,5 @@
+node_modules
+dist
+yarn-error.log
+__pycache__
+tsconfig.tsbuildinfo

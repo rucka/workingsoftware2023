@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import { useState } from 'react'
-import { getPrice, updatePrice } from '../controller'
+import { getPrice, updatePrice } from '../api'
 import { Box, Button, Centered, NumericInputField, Page, Protected } from '../components'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
@@ -13,14 +13,14 @@ const EditPricePage: NextPage = () => {
 
   const { isError, isLoading } = useQuery('getPrice', getPrice, {
     onSuccess: (p) => {
-      setPrice(p)
+      setPrice(p.price)
       setDisabled(false)
     }
   })
 
   const onSubmit = async () => {
     const newPrice = await updatePrice(price)
-    setPrice(newPrice)
+    setPrice(newPrice.price)
     push('/')
   }
 

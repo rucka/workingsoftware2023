@@ -108,8 +108,7 @@ const LoginLogout = ({ onLogoutClick }: { onLogoutClick?: () => void }) => {
           onLogoutClick()
         }
         onLogout()
-      }}
-    >
+      }}>
       Logout
     </a>
   ) : route !== '/signin' ? (

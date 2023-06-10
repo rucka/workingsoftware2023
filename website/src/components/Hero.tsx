@@ -1,5 +1,5 @@
 import React from 'react'
-import { Product } from '../controller'
+import { Product } from '../api'
 import { Section } from '../components'
 import { css } from 'styled-components'
 import { HeroHeadline } from '../components/HeroHeadline'
@@ -17,8 +17,7 @@ export function Hero({ product }: { product: Product }) {
           background-color: ${({ theme }) => theme.black};
           color: white;
         }
-      `}
-    >
+      `}>
       <HeroHeadline name={product.name} />
       <HeroImage
         heroImageUrl={product.cover}

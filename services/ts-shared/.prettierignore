@@ -1,0 +1,8 @@
+tsconfig*
+.next
+.vscode
+out
+node_modules
+legacy
+.d.*
+dist

@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
 dist
+.next
 yarn-error.log
 __pycache__
 tsconfig.tsbuildinfo

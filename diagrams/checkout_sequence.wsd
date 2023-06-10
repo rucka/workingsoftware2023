@@ -1,0 +1,47 @@
+@startuml Authorization
+
+title Checkout \n[Server side coordination]
+actor C as "Customer\nBrowser" order 1
+participant MS as "Profile Service\nhttp://*:3003" order 2 #FF8484
+participant CS as "Content Service\nhttp://*:3004" order 3 #FFFFE0 
+participant PS as "Price Service\nhttp://*:3005" order 4 #99FF99
+participant BS as "Checkout Service\nhttp://*:3006" order 5 #FFE7C7 
+participant IS as "Accounting Service\nhttp://*:3007"order 6 #CAF1DE 
+
+C -> BS : POST /checkout \n - productId
+BS -> CS: GET /product
+CS --> BS : Success: 200 \n - content
+BS -> PS: GET /price
+PS --> BS : Success: 200 \n - price
+BS -> BS: place order
+BS -> IS : POST /invoice \n - order
+IS --> BS : Success: 200 \n - invoiceNumber
+BS --> C : Success: 200 \n - invoiceNumber
+
+
+
+newpage Checkout \n[Client side coordination]
+actor C as "Customer\nBrowser" order 1
+participant MS as "Profile Service\nhttp://*:3003" order 2 #FF8484
+participant CS as "Content Service\nhttp://*:3004" order 3 #FFFFE0 
+participant PS as "Price Service\nhttp://*:3005" order 4 #99FF99
+participant BS as "Checkout Service\nhttp://*:3006" order 5 #FFE7C7 
+participant IS as "Accounting Service\nhttp://*:3007"order 6 #CAF1DE 
+
+== load sales page ==
+C -> MS: GET /my
+MS --> C : Success: 200 \n - profile
+C -> CS: GET /product
+CS --> C : Success: 200 \n - product
+C -> PS: GET /price
+PS --> C : Success: 200 \n - price
+
+
+== Checkout ==
+C -> BS : POST /checkout \n - {product, profile, price}
+BS -> BS: place order
+BS -> IS : POST /invoice \n - order
+IS --> BS : Success: 200 \n - invoiceNumber
+BS --> C : Success: 200 \n - invoiceNumber
+
+@enduml

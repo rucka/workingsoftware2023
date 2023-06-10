@@ -1,0 +1,44 @@
+@startmindmap MicroservicesModelMindmap
+
+<style>
+mindmapDiagram {
+    node {
+        BackgroundColor white
+    }
+    :depth(1) {
+      BackGroundColor lightgreen
+      RoundCorner 0
+    }
+    :depth(2) {
+      BackGroundColor lightblue
+    }
+}
+</style>
+
++_ microservices
+++ identity service
++++ credentials
+++++_ name
+++++_ password
+++++_ role
+++ product service
++++ product
+++++_ name
+++++_ description
+++++_ images
+++ price service
++++_ price
+++ order management service
+++ accounting service
++++ issuer
+++++_ name
+++++_ address
+++++_ city
++++ billingInformations
+++++_ name
+++++_ address
+++++_ city
+
+++[#FFBBCC] website
+
+@endmindmap

@@ -1,6 +1,6 @@
 import React from 'react'
 import type { NextPage } from 'next'
-import { getProduct } from '../controller'
+import { getProduct } from '../api'
 import { Page, Footer, Hero, ProductSection } from '../components'
 import { useQuery } from 'react-query'
 

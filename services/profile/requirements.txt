@@ -1,0 +1,4 @@
+Flask==2.1.1
+Flask-Login==0.6.0
+flask_cors==3.0.10
+python-jose==3.3.0

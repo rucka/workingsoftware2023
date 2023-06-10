@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Router from 'next/router'
-import { signin } from '../controller'
+import { signin } from '../api'
 import { useAuth } from '../user-context'
 import { UnAuthenticated } from '../components/UnAuthenticated'
 import { Box, Button, Centered, Empty, Page, TextInputField, Error } from '../components'

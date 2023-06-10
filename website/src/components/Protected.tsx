@@ -1,7 +1,8 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import { WithUser } from './WithUser'
-import { Role, User } from '../controller'
+import { User } from '../user-context'
+import { Role } from '../api'
 
 type ProtectedProps = { children: (user: User) => React.ReactElement; redirectTo?: string; roles?: Role[] }
 export function Protected({ children, redirectTo, roles }: ProtectedProps) {

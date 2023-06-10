@@ -4,13 +4,18 @@
   "author": "Gianluca Carucci",
   "workspaces": {
     "packages": [
-      "website"
+      "website",
+      "services/content",
+      "services/price",
+      "services/oms",
+      "services/accounting",
+      "services/ts-shared"
     ]
   },
   "scripts": {
     "build": "yarn workspaces run build",
     "clean": "yarn workspaces run clean",
-    "ts:check": "yarn workspaces run ts:check",
+    "ts:check": "yarn workspace @workingsoftware2023/ts-shared build && yarn workspaces run ts:check",
     "prettier:fix": "yarn workspaces run prettier:fix",
     "prettier:check": "yarn workspaces run prettier:check",
     "setup": "./setup.sh",

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { useQuery } from 'react-query'
 import styled from 'styled-components'
-import { checkout, getPrice } from '../controller'
+import { checkout, getPrice, me, getProduct } from '../api'
 import { useAuth } from '../user-context'
 import { Button } from './Button'
 import { Error } from './Error'
@@ -42,7 +42,7 @@ const GuestPriceLine = () => {
 
 const LoggedInPriceLine = () => {
   const { push } = useRouter()
-  const { isLoading, isError, data: price } = useQuery('getPrice', getPrice)
+  const { isLoading, isError, data } = useQuery('getPrice', getPrice)
 
   if (isLoading) {
     return <></>
@@ -53,13 +53,19 @@ const LoggedInPriceLine = () => {
   }
 
   const onBuy = async () => {
-    const orderNumber = await checkout()
+    if (!data) {
+      return
+    }
+    const profile = await me()
+    const product = await getProduct()
+
+    const orderNumber = await checkout(profile, product, data)
     push({ pathname: '/invoice', query: { orderNumber } })
   }
 
   return (
     <PriceContainer>
-      <Price>EUR {price}</Price>
+      <Price>EUR {data?.price}</Price>
       <Button onClick={onBuy}>buy now</Button>
     </PriceContainer>
   )

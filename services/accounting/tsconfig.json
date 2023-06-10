@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.json",
+  "references": [
+    {
+      "path": "../ts-shared"
+    }
+  ],
+
+  "compilerOptions": {
+    "resolveJsonModule": true
+  },
+  "include": ["src", "src/*.json"]
+}
