@@ -1,0 +1,32 @@
+{
+  "name": "@workingsoftware2023/website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "PORT=3001 next dev",
+    "clean": "rm -rf .next",
+    "build": "next build",
+    "start": "PORT=3001 next start",
+    "lint": "next lint",
+    "ts:check": "tsc --skipLibCheck --noEmit",
+    "prettier:fix": "prettier \"{**/*,*}.{ts,tsx,js,jsx,json,html}\" --write",
+    "prettier:check": "prettier --list-different \"{**/*,*}.{ts,tsx,js,jsx,json,html,md}\""
+  },
+  "dependencies": {
+    "next": "12.1.4",
+    "react": "18.0.0",
+    "react-dom": "18.0.0",
+    "react-query": "^3.35.0"
+  },
+  "devDependencies": {
+    "@types/node": "17.0.23",
+    "@types/react": "17.0.43",
+    "@types/react-dom": "17.0.14",
+    "@types/styled-components": "^5.1.24",
+    "eslint": "8.12.0",
+    "eslint-config-next": "12.1.4",
+    "prettier": "^2.6.2",
+    "styled-components": "^5.3.5",
+    "typescript": "4.6.3"
+  }
+}

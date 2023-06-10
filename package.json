@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "name": "workingsoftware2023",
+  "author": "Gianluca Carucci",
+  "workspaces": {
+    "packages": [
+      "website"
+    ]
+  },
+  "scripts": {
+    "build": "yarn workspaces run build",
+    "clean": "yarn workspaces run clean",
+    "ts:check": "yarn workspaces run ts:check",
+    "prettier:fix": "yarn workspaces run prettier:fix",
+    "prettier:check": "yarn workspaces run prettier:check",
+    "setup": "./setup.sh",
+    "start": "./run-all.sh"
+  }
+}
